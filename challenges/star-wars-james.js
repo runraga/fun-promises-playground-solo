@@ -52,27 +52,7 @@ function chooseItemForMoreInfo(itemsData, itemType) {
   };
   return Promise.all([inquirer.prompt(promptSelectItem), itemsData]);
 }
-// .then((results) => {
-//   // console.log(results[1][results[0].PCS][0])
-//   const newArr = [];
-//   for (el of results[1][results[0].PCS]) {
-//     newArr.push(axios.get(el));
-//   }
-//   return Promise.all(newArr);
-//   // return Promise.all(results[1][results[0].PCS].map(el =>axios.get(el)))
-// })
-// .then((results) => {
-//   const promptSelectItem = {
-//     type: "list",
-//     message: "Please select the item you want to know more about",
-//     choices: results,
-//     name: "itemRequested",
-//   };
-//   return inquirer.prompt(promptSelectItem);
-// });
-// .catch((err) => {
-//   console.log("error");
-// });
+/*********************************************************************/
 
 selectMovie()
   .then((result) => {
@@ -95,10 +75,12 @@ selectMovie()
   })
   .then((itemSelected) => {
     const itemToElaborate = itemSelected[0].itemRequested;
-    console.log(itemSelected[1].filter(ele => ele.data.name === itemToElaborate));
-    // console.log(itemSelected[1].data, "<=====info");
-  })
+    console.log(
+      itemSelected[1].filter((ele) => ele.data.name === itemToElaborate)
+    );
+  }) //subsequent .then will need to handle moving backwards and forwards on the information pathway
   .catch((err) => {
     console.log("error occurred");
     console.log(err);
   });
+  //in functions where you're asking for a selection with inquirer add an option to go back to the film item selection or to the choose film level and call the appropriate function passing film if needed
